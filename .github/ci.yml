@@ -22,4 +22,4 @@ jobs:
       run: npm install      # Or mvn install / pip install -r requirements.txt
 
     - name: Run automation tests
-      run: npm test         # Or the test command for your tool (e.g., `npx playwright test`, `mvn test`, etc.)
+      run: npx playwright test       # Or the test command for your tool (e.g., `npx playwright test`, `mvn test`, etc.)
