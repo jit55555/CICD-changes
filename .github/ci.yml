@@ -1,31 +1,25 @@
-name: Automation Test CI
+name: Daily Automation Run
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  schedule:
+    - cron: '30 7 * * *'  # 1 PM IST = 7:30 AM UTC
+  workflow_dispatch:      # This allows manual trigger from GitHub UI
 
 jobs:
-  run-tests:
+  run-automation:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+    - name: Set up Node.js (or Java, Python, etc. depending on your project)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'   # Change as per your environment
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install      # Or mvn install / pip install -r requirements.txt
 
-      - name: Install Playwright Browsers (if you're using Playwright)
-        run: npx playwright install
-
-      - name: Run Tests
-        run: npx playwright test --headed  # or: npx playwright test
+    - name: Run automation tests
+      run: npm test         # Or the test command for your tool (e.g., `npx playwright test`, `mvn test`, etc.)
