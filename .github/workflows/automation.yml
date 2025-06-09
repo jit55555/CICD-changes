@@ -21,5 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm install      # Or mvn install / pip install -r requirements.txt
 
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+
     - name: Run automation tests
       run: npx playwright test       # Or the test command for your tool (e.g., `npx playwright test`, `mvn test`, etc.)
